@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html>
 <head>
   
   <h1>
@@ -5,18 +7,89 @@
    </h1>
   
   <style>
+	body
+	{
+		background-color: lime;
+		text-align: center;
+	}
+	
+	h1
+	{
+		color: purple;
+	}
+	
     table, th, td
     {
       border: 2px solid black;
+		width: 100%;
+	  text-align: center;
     }
+	
+	#div1
+	{
+		float: left;
+		width: 640px;
+		height: 480px;
+		margin: 10px;
+		padding: 0px;
+		border: 5px solid black;
+	}
+	
+	#div2
+	{
+		float: right;
+		width: 640px;
+		height: 480px;
+		margin: 10px;
+		padding: 0px;
+		border: 5px solid black;
+	}
   </style>
+  
+  <script>
+  function form()
+  {
+	var value = document.forms["Form"]["Name"].value;
+	
+	if (value == "420")
+	{
+		alert("Noice")
+		return true;
+	}
+	else
+	{
+		alert("Fukken blaze it");
+		return false;
+	}
+  }
+  
+	function allowDrop(ev)
+	{
+		ev.preventDefault();
+	}
+
+	function drag(ev)
+	{
+		ev.dataTransfer.setData("text", ev.target.id);
+	}
+
+	function drop(ev)
+	{
+		ev.preventDefault();
+		var data = ev.dataTransfer.getData("text");
+		ev.target.appendChild(document.getElementById(data));
+	}
+  </script>
   
 </head>
   
 <body>
-  
-  <img src="https://i.kym-cdn.com/entries/icons/original/000/016/546/hidethepainharold.jpg" alt="Hide the pain" width="640" height="480">
-  
+	<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+		<img src="https://i.kym-cdn.com/entries/icons/original/000/016/546/hidethepainharold.jpg" alt="Hide the pain" width="640" height="480" draggable="true" ondragstart="drag(event)" id="drag1">
+	</div>
+
+	<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+	
   <h2>Here is a list</h2
   
   <ul>
@@ -36,6 +109,8 @@
       <td>69</td>
     </tr>
     
+	<h3>Here is a table</h3>
+	
     <tr>
       <td>Blaze it</td>
       <td>420</td>
@@ -43,4 +118,39 @@
 
 </table>
 
+<br>
+
+<form name="Form" action="/action_page.php" onsubmit="return form()" method="post">
+	Blaze it: <input type="text" name="Name">
+	<input type="submit" value="Submit">
+</form>
+
+<br>
+
+<button onclick="getLocation()">Locate MEMES</button>
+<p id="demo">MEMES</p>
+<script>
+var x = document.getElementById("demo");
+
+function getLocation()
+{
+  if (navigator.geolocation) 
+  {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) 
+{
+  x.innerHTML = "Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude;
+}
+</script>
+<br>
+
+<iframe width="640" height="480" src="https://youtu.be/0SSYzl9fXOQ"></iframe> 
+
 </body>
+</html>
